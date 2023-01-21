@@ -6,6 +6,12 @@ import subprocess
 import string
 import os
 
+
+description = """
+A linux utility for finding the locations of byte patterns in a process'
+memory. Must be run as root
+"""
+
 log = logging.getLogger("procgrep")
 handler = logging.StreamHandler()
 handler.setFormatter(logging.Formatter('%(levelname)-7s | %(asctime)-23s | %(message)s'))
@@ -106,7 +112,7 @@ def find_in_pid(pid, pattern, dump_region=False, all_matches=False,
 
 
 def cli():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("pid", type=int, help="process to search")
     parser.add_argument("-x", "--hexdump-file",
                         help="path to a hexdump file")
